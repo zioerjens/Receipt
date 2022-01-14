@@ -1,0 +1,14 @@
+<h1>Gmail API Quickstart</h1>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" style="display: block;" (click)="auth();">Authorize</button>
+<button id="signout_button" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+<hr>
+<h2>Table</h2>
+<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+<div style="padding-top: 1em">
+  <app-receipt-table [dataSource]="articles"></app-receipt-table>
+</div>

@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../environments/environment";
-// import {AngularFireAuth} from '@angular/fire/auth';
-// import * as firebase from 'firebase';
+import {environment} from '../../environments/environment';
 
 declare var gapi: any;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
 
   constructor(
