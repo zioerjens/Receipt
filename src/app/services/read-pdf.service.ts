@@ -72,7 +72,6 @@ export class ReadPdfService {
         // The main trick to obtain the text of the PDF page, use the getTextContent method
         pdfPage.getTextContent().then((textContent) => {
           const textItems = textContent.items;
-          console.log(textItems);
           let finalString = '';
 
           // Concatenate the string of the item to the final string
