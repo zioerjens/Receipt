@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
+import {AuthenticationService} from '../../services/authentication.service';
 import {ParsePdfTextService} from '../../services/parse-pdf-text.service';
 import {ReceiptArticle} from '../../models/receipt-article';
 
@@ -13,15 +13,23 @@ export class HomeComponent implements OnInit {
   public articles: ReceiptArticle[];
 
   constructor(
-    private apiService: ApiService,
+    private apiService: AuthenticationService,
     private parsePDF: ParsePdfTextService) {
   }
 
   ngOnInit(): void {
   }
 
-  auth(): void {
-    this.apiService.initGoogleOAuth();
+  signIn(): void {
+    this.apiService.signIn();
+  }
+
+  checkLogin(): void {
+    this.apiService.fetchLabels();
+  }
+
+  initClient(): void {
+    this.apiService.initClient();
   }
 
   selectFile($event): any {

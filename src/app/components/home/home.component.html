@@ -1,7 +1,9 @@
 <h1>Gmail API Quickstart</h1>
 
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize_button" style="display: block;" (click)="auth();">Authorize</button>
+<button id="authorize_button" style="display: block;" (click)="signIn();">Authorize</button>
+<button id="check_authorization" style="display: block;" (click)="checkLogin()">Check Status</button>
+<button id="init_client" style="display: block;" (click)="initClient()">Initialize API Client</button>
 <button id="signout_button" style="display: none;">Sign Out</button>
 
 <pre id="content" style="white-space: pre-wrap;"></pre>
