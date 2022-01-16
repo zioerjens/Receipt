@@ -17,7 +17,7 @@ import {environment} from "../environments/environment";
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: environment.GAPI_CLIENT_ID,
   discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
-  scope: ["https://www.googleapis.com/auth/userinfo.email"].join(" ")
+  scope: ["https://www.googleapis.com/auth/gmail.readonly"].join(" ")
 };
 
 @NgModule({

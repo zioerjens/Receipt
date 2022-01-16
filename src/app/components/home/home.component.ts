@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
   }
 
   checkLogin(): void {
-    this.apiService.fetchLabels();
+
   }
 
   initClient(): void {
-    this.apiService.initClient();
+
   }
 
   selectFile($event): any {
