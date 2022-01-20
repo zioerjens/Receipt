@@ -44,3 +44,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Google Credentials
+credentials.json
+token.json
+
+# Receipts
+/backend-receipt/Downloads/*
