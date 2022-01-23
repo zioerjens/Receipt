@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
     this.parsePDF.getFormattedData(file).subscribe(result => {
       this.articles = result;
     });
-    this.receiptService.createUpdate();
   }
 
   selectFile($event): void {
