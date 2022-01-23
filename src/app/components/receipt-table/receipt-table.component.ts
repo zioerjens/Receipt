@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ReceiptArticle} from '../../models/receipt-article';
 
 @Component({
@@ -6,18 +6,12 @@ import {ReceiptArticle} from '../../models/receipt-article';
   templateUrl: './receipt-table.component.html',
   styleUrls: ['./receipt-table.component.scss']
 })
-export class ReceiptTableComponent implements OnInit {
+export class ReceiptTableComponent {
 
   @Input()
   dataSource: ReceiptArticle[];
 
   displayedColumns: string[] = ['name', 'quantity', 'articlePrice', 'reduced', 'total'];
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   getTotal(): number {
     if (this.dataSource) {

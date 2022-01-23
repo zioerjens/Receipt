@@ -6,6 +6,7 @@ Installation Backend:
 4. py -m pip install --upgrade flask-restful
 5. py -m pip install --upgrade flask
 5. py -m pip install --upgrade flask-cors
+5. py -m pip install --upgrade mysql-connector-python
 
 Set-Up credentials:
 
@@ -13,3 +14,45 @@ Set-Up credentials:
 2. Download OAuth 2.0 Client IDs as Json
 3. Save the Json as credentials.json at project root
 4. Login via frontend is possible, the backend saves a token.json when executed the first time
+
+SQL-Code:
+```` SQL
+drop database if exists receiptDB;
+
+create database if not exists receiptDB;
+use receiptDB;
+create table if not exists article (
+    id bigint NOT NULL AUTO_INCREMENT,
+    fk_receipt bigint NOT NULL,
+    name varchar(300) NOT NULL,
+    quantity int NOT NULL,
+    articlePrice float NOT NULL,
+    reduced float,
+    total float NOT NULL    
+);
+
+create table if not exists receipt (
+	id bigint NOT NULL AUTO_INCREMENT,
+    user varchar(30) NOT NULL,
+    total float
+);
+
+insert into article (
+	fk_receipt,
+    name,
+    quantity,
+    articlePrice,
+    reduced,
+    total
+) values (
+	1,
+    "Produkt",
+    2,
+    5.50,
+    1.10,
+    4.40
+);
+
+insert into receipt ( user ) values ("SVEN");
+
+```
