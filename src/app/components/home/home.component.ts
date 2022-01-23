@@ -24,19 +24,9 @@ export class HomeComponent implements OnInit {
     this.apiService.signIn();
   }
 
-  checkLogin(): void {
-
-  }
-
-  initClient(): void {
-
-  }
-
   selectFile($event): any {
     this.parsePDF.getFormattedData($event.target.files[0]).subscribe(result => {
       this.articles = result;
     });
   }
-
-
 }

@@ -1,6 +1,6 @@
 import {Injectable, NgZone, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {GoogleAuthService} from "ng-gapi";
+import {GoogleAuthService} from 'ng-gapi';
 declare var gapi: any;
 
 @Injectable()
@@ -13,8 +13,7 @@ export class AuthenticationService {
   /**
    *  Sign in the user
    */
-  signIn() {
-
+  signIn(): void {
     this.googleAuth.getAuth()
       .subscribe((auth) => {
         auth.signIn().then(res => console.log(res));
@@ -24,7 +23,7 @@ export class AuthenticationService {
   /**
    *  Sign out
    */
-  signOut() {
+  signOut(): void {
     gapi.auth2.getAuthInstance().signOut();
   }
 

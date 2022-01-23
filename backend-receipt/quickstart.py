@@ -2,6 +2,8 @@ from __future__ import print_function
 
 import os.path
 import base64
+from io import StringIO
+import PyPDF2
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -38,6 +40,7 @@ def attachment_download(creds):
           with open(path, 'wb') as f:
             f.write(file_data)
             f.close()
+
   except Exception as error:
     print(error)
 
@@ -64,6 +67,7 @@ def main():
       token.write(creds.to_json())
 
   attachment_download(creds)
+
 
   # try:
   #   # Call the Gmail API
