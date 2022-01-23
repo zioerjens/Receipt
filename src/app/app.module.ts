@@ -11,14 +11,13 @@ import {AuthenticationService} from './services/authentication.service';
 import {ReceiptTableComponent} from './components/receipt-table/receipt-table.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-import {GoogleApiModule, GoogleApiService, GoogleAuthService, NgGapiClientConfig, NG_GAPI_CONFIG, GoogleApiConfig} from 'ng-gapi';
-import {environment} from '../environments/environment';
-import {credentials} from '../credentials';
+import {GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
+import credentials from '../../credentials.json';
 
-let gapiClientConfig: NgGapiClientConfig = {
-  client_id: credentials.GAPI_CLIENT_ID,
-  discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
-  scope: ["https://www.googleapis.com/auth/gmail.readonly"].join(" ")
+const gapiClientConfig: NgGapiClientConfig = {
+  client_id: credentials.web.client_id,
+  discoveryDocs: ['https://analyticsreporting.googleapis.com/$discovery/rest?version=v4'],
+  scope: ['https://www.googleapis.com/auth/gmail.readonly'].join(' ')
 };
 
 @NgModule({
