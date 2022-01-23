@@ -1,5 +1,4 @@
-import {Injectable, NgZone, OnInit} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {Injectable} from '@angular/core';
 import {GoogleAuthService} from 'ng-gapi';
 declare var gapi: any;
 
