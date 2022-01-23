@@ -15,14 +15,14 @@ Set-Up credentials:
 3. Save the Json as credentials.json at project root
 4. Login via frontend is possible, the backend saves a token.json when executed the first time
 
-SQL-Code:
-```` SQL
+SQL-Code to create the database and insert two rows of dummy data:
+```` mysql
 drop database if exists receiptDB;
 
 create database if not exists receiptDB;
 use receiptDB;
 create table if not exists article (
-    id bigint NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_receipt bigint NOT NULL,
     name varchar(300) NOT NULL,
     quantity int NOT NULL,
@@ -32,7 +32,8 @@ create table if not exists article (
 );
 
 create table if not exists receipt (
-	id bigint NOT NULL AUTO_INCREMENT,
+	id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(200),
     user varchar(30) NOT NULL,
     total float
 );
@@ -53,6 +54,5 @@ insert into article (
     4.40
 );
 
-insert into receipt ( user ) values ("SVEN");
-
-```
+insert into receipt ( name, user ) values ("Receipt 01, Coop Sulgenbach", "SVEN");
+````

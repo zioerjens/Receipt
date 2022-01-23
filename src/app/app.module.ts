@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home/home.component';
-import {ReadPdfService} from './services/read-pdf.service';
+import {ParsePdfService} from './services/parse-pdf.service';
 import {ParsePdfTextService} from './services/parse-pdf-text.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationService} from './services/authentication.service';
@@ -39,7 +39,7 @@ const gapiClientConfig: NgGapiClientConfig = {
     }),
     HttpClientModule
   ],
-  providers: [ReadPdfService, ParsePdfTextService, AuthenticationService],
+  providers: [ParsePdfService, ParsePdfTextService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {ReadPdfService} from './read-pdf.service';
-import {ReceiptArticle} from '../models/receipt-article';
+import {ParsePdfService} from './parse-pdf.service';
+import {Article} from '../models/article';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable()
 export class ParsePdfTextService {
 
-  constructor(private readPdf: ReadPdfService) {
+  constructor(private readPdf: ParsePdfService) {
   }
 
-  getFormattedData(file): Observable<ReceiptArticle[]> {
+  getFormattedData(file): Observable<Article[]> {
     return this.readPdf.readPdf(file).pipe(
       map(text => {
         return this.getRelevantParts(text.reduce((a, b) => a + b, ''));
@@ -18,12 +18,12 @@ export class ParsePdfTextService {
     );
   }
 
-  getRelevantParts(text: string): ReceiptArticle[] {
+  getRelevantParts(text: string): Article[] {
     text = 'Artikel' + text.split('Artikel')[1].split('Total CHF')[0];
     return this.parseObjects(text.split('__'));
   }
 
-  parseObjects(elements: string[]): ReceiptArticle[] {
+  parseObjects(elements: string[]): Article[] {
     const results = [];
     elements = elements.filter(e => e !== 'A');
 
@@ -35,7 +35,7 @@ export class ParsePdfTextService {
       if (!this.hasNext(elements, i, missingCellOffset)) {
         break;
       }
-      const o: ReceiptArticle = {
+      const o: Article = {
         id: j,
         name: elements[i + missingCellOffset],
         quantity: parseFloat(elements[i + 1 + missingCellOffset]),

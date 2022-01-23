@@ -4,7 +4,7 @@ import {from, Observable} from 'rxjs';
 declare let PDFJS: any;
 
 @Injectable()
-export class ReadPdfService {
+export class ParsePdfService {
 
   constructor() {
   }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {ParsePdfTextService} from '../../services/parse-pdf-text.service';
-import {ReceiptArticle} from '../../models/receipt-article';
+import {Article} from '../../models/article';
 import {PdfService} from '../../services/pdf.service';
 import {first} from 'rxjs/operators';
+import {ReceiptService} from '../../services/receipt.service';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,14 @@ import {first} from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  public articles: ReceiptArticle[];
+  public articles: Article[];
   allPdfNames: string[] = [];
 
   constructor(
     private authenticationService: AuthenticationService,
     private parsePDF: ParsePdfTextService,
-    private pdfService: PdfService) {
+    private pdfService: PdfService,
+    private receiptService: ReceiptService) {
   }
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
     this.parsePDF.getFormattedData(file).subscribe(result => {
       this.articles = result;
     });
+    this.receiptService.createUpdate();
   }
 
   selectFile($event): void {

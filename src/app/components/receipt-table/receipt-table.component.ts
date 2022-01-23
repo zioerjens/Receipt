@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ReceiptArticle} from '../../models/receipt-article';
+import {Article} from '../../models/article';
 
 @Component({
   selector: 'app-receipt-table',
@@ -9,7 +9,7 @@ import {ReceiptArticle} from '../../models/receipt-article';
 export class ReceiptTableComponent {
 
   @Input()
-  dataSource: ReceiptArticle[];
+  dataSource: Article[];
 
   displayedColumns: string[] = ['name', 'quantity', 'articlePrice', 'reduced', 'total'];
 
