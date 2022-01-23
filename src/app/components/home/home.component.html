@@ -6,6 +6,11 @@
 <button id="init_client" style="display: block;">Initialize API Client</button>
 <button id="signout_button" style="display: none;">Sign Out</button>
 
+<h2>Select PDF</h2>
+<div *ngFor="let pdfName of allPdfNames">
+  <button (click)="fetchPdf(pdfName)">{{pdfName}}</button>
+</div>
+
 <pre id="content" style="white-space: pre-wrap;"></pre>
 <hr>
 <h2>Table</h2>

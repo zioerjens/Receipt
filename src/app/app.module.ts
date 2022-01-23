@@ -13,6 +13,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
 import credentials from '../../credentials.json';
+import {HttpClientModule} from '@angular/common/http';
 
 const gapiClientConfig: NgGapiClientConfig = {
   client_id: credentials.web.client_id,
@@ -36,6 +37,7 @@ const gapiClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig
     }),
+    HttpClientModule
   ],
   providers: [ReadPdfService, ParsePdfTextService, AuthenticationService],
   bootstrap: [AppComponent]
