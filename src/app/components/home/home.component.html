@@ -1,14 +1,11 @@
 <h1>Gmail API Quickstart</h1>
 
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize_button" style="display: block;" (click)="signIn();">Authorize</button>
-<button id="check_authorization" style="display: block;">Check Status</button>
-<button id="init_client" style="display: block;">Initialize API Client</button>
-<button id="signout_button" style="display: none;">Sign Out</button>
+<button class="mat-raised-button" id="authorize_button" style="display: block;" (click)="signIn();">Authorize</button>
 
 <h2>Select PDF</h2>
 <div *ngFor="let pdfName of allPdfNames">
-  <button (click)="fetchPdf(pdfName)">{{pdfName}}</button>
+  <button class="mat-raised-button" (click)="fetchPdf(pdfName)">{{pdfName}}</button>
 </div>
 
 <pre id="content" style="white-space: pre-wrap;"></pre>
