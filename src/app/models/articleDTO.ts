@@ -1,8 +1,8 @@
-export interface Article {
-  id: number;
+export interface ArticleDTO {
+  id?: number;
   name: string;
   quantity: number;
-  articlePrice: number;
+  price: number;
   reduced?: number;
   total: number;
 }

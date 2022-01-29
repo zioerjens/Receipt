@@ -9,61 +9,19 @@ from flask import Flask, send_file, request
 from flask_cors import CORS
 from flask_restful import Api
 
+from ReceiptService import *
+
 store_dir = os.getcwd() + '\\Downloads'
 
 app = Flask(__name__)
 api = Api(app)
 CORS(app)  # For limiting the request urls
+global connection
 connection = mysql.connector.connect(user='backend', password='1234', host='127.0.0.1', database='receiptDB')
 
 # Restrict request Urls
 # TODO add webapp url and test this so only authenticated users can send requests
 app.config["CORS_ORIGINS"] = ["https://your-web-app.com", "http://localhost:4200"]
-
-
-# DATABASE
-
-def get_all_receipts():
-    cursor = connection.cursor()
-    query = "SELECT * FROM receipt"
-    cursor.execute(query)
-    all_elements = [element for element in cursor]
-    return all_elements
-
-
-def create_receipt(receipt):
-    print(receipt)
-
-
-def update_receipt(receipt):
-    print(receipt)
-
-# jsonTest = json.dumps({
-#   "name": "new Product",
-#   "id": "2917293492",
-#   "user": "SVEN",
-#   "quantity": "2",
-#   "articlePrice": "2.2",
-#   "reduced": "1.1",
-#   "total": "5.5"
-# })
-
-# update_receipt(jsonTest)
-
-def get_receipt(receipt_id):
-    cursor = connection.cursor()
-    query = "SELECT * FROM receipt WHERE id = " + receipt_id
-    cursor.execute(query)
-    element = [element for element in cursor]
-    return element
-
-
-def create_update_receipt(receipt):
-    if len(get_receipt(receipt.id)) == 1:
-        update_receipt(receipt)
-    else:
-        create_receipt(receipt)
-        # create_receipt(receipt_id)
 
 
 # ROUTES /pdf
@@ -91,9 +49,16 @@ def all_receipts():
     return json.dumps(get_all_receipts())
 
 
-@app.route('/receipt', methods=['POST'])
-def receipt_by_id():
-    create_update_receipt(request.values)
+@app.route('/receipt', methods=['POST', 'PUT'])
+def create_update_delete_receipt():
+    if request.method == 'POST':
+        receipt = map_frontend_to_backend_receiptDTO(request.get_json())
+        create_receipt(receipt)
+        return 'not yet implemented', 200
+
+    if request.method == 'PUT':
+        update_receipt(request.form)
+        return 'not yet implemented', 200
 
 
 if __name__ == '__main__':

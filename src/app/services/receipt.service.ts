@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {ReceiptDTO} from '../models/receiptDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,12 @@ export class ReceiptService {
 
   constructor(private http: HttpClient) {}
 
-  readonly receipt = {
-    name: 'Coop Name',
-    user: 'Sven',
-    articles: [{
-      name: 'ArticleName',
-      quantity: 2,
-      articlePrice: 3.2,
-      reduced : 1.1,
-      total: 2.1
-    }]
-  };
+  create(receipt: ReceiptDTO): void {
+    this.http.post<any>(this.BASE_URL, receipt).subscribe(next => {});
+  }
 
-  createUpdate(Receipt?): void {
-    this.http.post<any>(this.BASE_URL, this.receipt).subscribe(next => {});
-    }
+  update(receipt: ReceiptDTO): void {
+    const receiptJSON = JSON.stringify(receipt);
+    this.http.put<any>(this.BASE_URL, receiptJSON).subscribe(next => {});
+  }
 }

@@ -14,5 +14,8 @@
 <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
 <input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
 <div style="padding-top: 1em">
-  <app-receipt-table [dataSource]="articles"></app-receipt-table>
+  <app-receipt-table [dataSource]="receipt.articles"></app-receipt-table>
+</div>
+<div>
+  <button class="mat-raised-button" (click)="saveReceipt(receipt)">Save currently loaded receipt</button>
 </div>

@@ -26,23 +26,22 @@ create table if not exists article (
     fk_receipt bigint NOT NULL,
     name varchar(300) NOT NULL,
     quantity int NOT NULL,
-    articlePrice float NOT NULL,
+    price float NOT NULL,
     reduced float,
-    total float NOT NULL    
+    total float NOT NULL
 );
 
 create table if not exists receipt (
 	id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name varchar(200),
-    user varchar(30) NOT NULL,
-    total float
+    user varchar(30) NOT NULL
 );
 
 insert into article (
 	fk_receipt,
     name,
     quantity,
-    articlePrice,
+    price,
     reduced,
     total
 ) values (

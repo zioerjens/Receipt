@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {ParsePdfTextService} from '../../services/parse-pdf-text.service';
-import {Article} from '../../models/article';
 import {PdfService} from '../../services/pdf.service';
 import {first} from 'rxjs/operators';
 import {ReceiptService} from '../../services/receipt.service';
+import {ReceiptDTO} from '../../models/receiptDTO';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,17 @@ import {ReceiptService} from '../../services/receipt.service';
 })
 export class HomeComponent implements OnInit {
 
-  public articles: Article[];
+  receipt = {
+    name: 'Coop Name',
+    user: 'Sven',
+    articles: [{
+      name: 'ArticleName',
+      quantity: 2,
+      price: 3.2,
+      reduced : 1.1,
+      total: 2.1
+    }]
+  } as ReceiptDTO;
   allPdfNames: string[] = [];
 
   constructor(
@@ -48,8 +58,16 @@ export class HomeComponent implements OnInit {
 
   loadPdf(file: File): void {
     this.parsePDF.getFormattedData(file).subscribe(result => {
-      this.articles = result;
+      this.receipt.articles = result;
     });
+  }
+
+  saveReceipt(receipt: ReceiptDTO): void {
+    if (receipt.id == null) {
+      this.receiptService.create(receipt);
+    } else {
+      this.receiptService.update(receipt);
+    }
   }
 
   selectFile($event): void {

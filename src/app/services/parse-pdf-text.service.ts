@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ParsePdfService} from './parse-pdf.service';
-import {Article} from '../models/article';
+import {ArticleDTO} from '../models/articleDTO';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ export class ParsePdfTextService {
   constructor(private readPdf: ParsePdfService) {
   }
 
-  getFormattedData(file): Observable<Article[]> {
+  getFormattedData(file): Observable<ArticleDTO[]> {
     return this.readPdf.readPdf(file).pipe(
       map(text => {
         return this.getRelevantParts(text.reduce((a, b) => a + b, ''));
@@ -18,12 +18,12 @@ export class ParsePdfTextService {
     );
   }
 
-  getRelevantParts(text: string): Article[] {
+  getRelevantParts(text: string): ArticleDTO[] {
     text = 'Artikel' + text.split('Artikel')[1].split('Total CHF')[0];
     return this.parseObjects(text.split('__'));
   }
 
-  parseObjects(elements: string[]): Article[] {
+  parseObjects(elements: string[]): ArticleDTO[] {
     const results = [];
     elements = elements.filter(e => e !== 'A');
 
@@ -35,11 +35,11 @@ export class ParsePdfTextService {
       if (!this.hasNext(elements, i, missingCellOffset)) {
         break;
       }
-      const o: Article = {
+      const o: ArticleDTO = {
         id: j,
         name: elements[i + missingCellOffset],
         quantity: parseFloat(elements[i + 1 + missingCellOffset]),
-        articlePrice: parseFloat(elements[i + 2 + missingCellOffset]),
+        price: parseFloat(elements[i + 2 + missingCellOffset]),
         total: 0
       };
       // Produkt ist keine Aktion, darum fehlt eine Zelle, darum wird missingCellOffset dekrementiert
