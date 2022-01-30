@@ -3,6 +3,7 @@ import {ParsePdfService} from './parse-pdf.service';
 import {ArticleDTO} from '../models/articleDTO';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {ReceiptDTO} from '../models/receiptDTO';
 
 @Injectable()
 export class ParsePdfTextService {
@@ -10,10 +11,10 @@ export class ParsePdfTextService {
   constructor(private readPdf: ParsePdfService) {
   }
 
-  getFormattedData(file): Observable<ArticleDTO[]> {
+  getFormattedData(file): Observable<ReceiptDTO> {
     return this.readPdf.readPdf(file).pipe(
       map(text => {
-        return this.getRelevantParts(text.reduce((a, b) => a + b, ''));
+        return new ReceiptDTO(file.name, this.getRelevantParts(text.reduce((a, b) => a + b, '')));
       })
     );
   }

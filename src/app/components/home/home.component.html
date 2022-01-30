@@ -4,8 +4,8 @@
 <button class="mat-raised-button" id="authorize_button" style="display: block;" (click)="signIn();">Authorize</button>
 
 <h2>Select PDF</h2>
-<div *ngFor="let pdfName of allPdfNames">
-  <button class="mat-raised-button" (click)="fetchPdf(pdfName)">{{pdfName}}</button>
+<div *ngFor="let receipt of allReceipts">
+  <button class="mat-raised-button" (click)="loadReceipt(receipt)">{{receipt.name}}</button>
 </div>
 
 <pre id="content" style="white-space: pre-wrap;"></pre>

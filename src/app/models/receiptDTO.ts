@@ -1,9 +1,13 @@
 import {ArticleDTO} from './articleDTO';
 
-export interface ReceiptDTO {
+export class ReceiptDTO {
   id?: number;
   name: string;
-  user: string;
-  total: number;
+  user?: string;
   articles?: ArticleDTO[];
+
+  constructor(name, articles) {
+    this.name = name;
+    this.articles = articles;
+  }
 }

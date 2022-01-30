@@ -20,11 +20,12 @@ export class HomeComponent implements OnInit {
       name: 'ArticleName',
       quantity: 2,
       price: 3.2,
-      reduced : 1.1,
+      reduced: 1.1,
       total: 2.1
     }]
   } as ReceiptDTO;
   allPdfNames: string[] = [];
+  allReceipts: ReceiptDTO[] = [];
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -34,7 +35,36 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchAllReceipts();
     this.initPdfNames();
+  }
+
+  fetchAllReceipts(): void {
+    this.receiptService.getAll().subscribe( result => {
+      this.allReceipts.push(...result);
+      this.downloadPdfsAndSave();
+    });
+  }
+
+  loadReceipt(receipt: ReceiptDTO): void {
+    this.receipt = receipt;
+  }
+
+  downloadPdfsAndSave(): void {
+    this.pdfService.downloadFromMail().pipe(first()).subscribe(result => {
+      result.forEach(pdfName => {
+        this.pdfService.getByName(pdfName).pipe(first()).subscribe(pdfData => {
+          const file = new File([pdfData], pdfName.slice(0, -4));
+          this.parsePDF.getFormattedData(file).subscribe(receipt => {
+            console.log('creating:');
+            console.log(receipt);
+            this.receiptService.create(receipt).pipe(first()).subscribe(savedReceipt => {
+              this.allReceipts.push(savedReceipt);
+            });
+          });
+        });
+      });
+    });
   }
 
   initPdfNames(): void {
@@ -58,7 +88,7 @@ export class HomeComponent implements OnInit {
 
   loadPdf(file: File): void {
     this.parsePDF.getFormattedData(file).subscribe(result => {
-      this.receipt.articles = result;
+      this.receipt.articles = result.articles;
     });
   }
 

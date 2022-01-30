@@ -5,8 +5,9 @@ Installation Backend:
 3. py -m pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 4. py -m pip install --upgrade flask-restful
 5. py -m pip install --upgrade flask
-5. py -m pip install --upgrade flask-cors
-5. py -m pip install --upgrade mysql-connector-python
+6. py -m pip install --upgrade flask-cors
+7. py -m pip install --upgrade mysql-connector-python
+8. py -m pip install --upgrade jsonpickle
 
 Set-Up credentials:
 
@@ -25,7 +26,7 @@ create table if not exists article (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_receipt bigint NOT NULL,
     name varchar(300) NOT NULL,
-    quantity int NOT NULL,
+    quantity float NOT NULL,
     price float NOT NULL,
     reduced float,
     total float NOT NULL
@@ -33,8 +34,8 @@ create table if not exists article (
 
 create table if not exists receipt (
 	id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name varchar(200),
-    user varchar(30) NOT NULL
+    name varchar(200) UNIQUE NOT NULL,
+    user varchar(30)
 );
 
 insert into article (

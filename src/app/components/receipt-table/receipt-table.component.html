@@ -14,14 +14,14 @@
   <!-- Quantity Column -->
   <ng-container matColumnDef="quantity">
     <th mat-header-cell *matHeaderCellDef> Quantity </th>
-    <td mat-cell *matCellDef="let element"> {{element.quantity | currency: 'CHF'}}</td>
+    <td mat-cell *matCellDef="let element"> {{element.quantity}}</td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
-  <!-- ArticlePrice Column -->
-  <ng-container matColumnDef="articlePrice">
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> {{element.articlePrice | currency: 'CHF'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.price | currency: 'CHF'}} </td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 

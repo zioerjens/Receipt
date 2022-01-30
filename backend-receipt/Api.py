@@ -4,11 +4,13 @@ from os import listdir
 from os.path import isfile, join
 from urllib.parse import unquote
 
+import jsonpickle
 import mysql.connector
 from flask import Flask, send_file, request
 from flask_cors import CORS
 from flask_restful import Api
 
+import LoginAndDownload
 from ReceiptService import *
 
 store_dir = os.getcwd() + '\\Downloads'
@@ -41,20 +43,27 @@ def all_pdfs():
     return all_files_json, 200
 
 
+@app.route('/pdf/download-from-mail')
+def all_pdfs_fetched_from_mail():
+    newly_downloaded_pdfs = LoginAndDownload.main()
+    return jsonpickle.encode(newly_downloaded_pdfs, unpicklable=False), 200
+
+
 # ROUTES /receipt
 
 
 @app.route('/receipt/all')
 def all_receipts():
-    return json.dumps(get_all_receipts())
+    receipts = get_all_receipts()
+    return jsonpickle.encode(receipts, unpicklable=False), 200
 
 
 @app.route('/receipt', methods=['POST', 'PUT'])
 def create_update_delete_receipt():
     if request.method == 'POST':
-        receipt = map_frontend_to_backend_receiptDTO(request.get_json())
-        create_receipt(receipt)
-        return 'not yet implemented', 200
+        receipt = map_json_to_receiptDTO(request.get_json())
+        receipt: ReceiptDTO = create_receipt(receipt)
+        return jsonpickle.encode(receipt, unpicklable=False), 200
 
     if request.method == 'PUT':
         update_receipt(request.form)
@@ -63,3 +72,4 @@ def create_update_delete_receipt():
 
 if __name__ == '__main__':
     app.run()
+

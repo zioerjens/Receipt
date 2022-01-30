@@ -11,7 +11,7 @@ export class ReceiptTableComponent {
   @Input()
   dataSource: ArticleDTO[];
 
-  displayedColumns: string[] = ['name', 'quantity', 'articlePrice', 'reduced', 'total'];
+  displayedColumns: string[] = ['name', 'quantity', 'price', 'reduced', 'total'];
 
   getTotal(): number {
     if (this.dataSource) {

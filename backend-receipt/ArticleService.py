@@ -1,7 +1,10 @@
-from ArticleDTO import *
 from Repo import Repo
 
 
-def create_articles(articles):
+def create_articles(articles, receipt_id):
+    saved_articles = []
     for article in articles:
-        Repo.create_article(map_frontend_to_backend_articleDTO(article))
+        saved_article = Repo.create_article(article, receipt_id)
+        saved_articles.append(saved_article)
+
+    return saved_articles

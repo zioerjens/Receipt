@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ReceiptDTO} from '../models/receiptDTO';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,15 @@ export class ReceiptService {
 
   constructor(private http: HttpClient) {}
 
-  create(receipt: ReceiptDTO): void {
-    this.http.post<any>(this.BASE_URL, receipt).subscribe(next => {});
+  create(receipt: ReceiptDTO): Observable<ReceiptDTO> {
+    return this.http.post<ReceiptDTO>(this.BASE_URL, receipt);
   }
 
-  update(receipt: ReceiptDTO): void {
-    const receiptJSON = JSON.stringify(receipt);
-    this.http.put<any>(this.BASE_URL, receiptJSON).subscribe(next => {});
+  update(receipt: ReceiptDTO): Observable<ReceiptDTO> {
+    return this.http.put<any>(this.BASE_URL, receipt);
+  }
+
+  getAll(): Observable<ReceiptDTO[]> {
+    return this.http.get<any>(this.BASE_URL + '/all');
   }
 }

@@ -12,6 +12,10 @@ export class PdfService {
 
   constructor(private http: HttpClient) {}
 
+  downloadFromMail(): Observable<string[]> {
+    return this.http.get<string[]>(this.BASE_URL + '/download-from-mail');
+  }
+
   getAllNames(): Observable<JSON> {
     return this.http.get<JSON>(this.BASE_URL + '/all');
   }

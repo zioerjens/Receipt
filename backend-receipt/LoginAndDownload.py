@@ -14,6 +14,7 @@ store_dir = os.getcwd()
 
 
 def attachment_download(creds):
+    newly_downloaded = []
     try:
         service = build('gmail', 'v1', credentials=creds)
         results = service.users().messages().list(userId='me', labelIds=[
@@ -41,9 +42,12 @@ def attachment_download(creds):
                             f.write(file_data)
                             f.close()
                             print('downloaded: ' + filename)
+                            newly_downloaded.append(filename)
 
     except Exception as error:
         print(error)
+
+    return newly_downloaded
 
 
 def main():
@@ -67,8 +71,4 @@ def main():
         with open('../token.json', 'w') as token:
             token.write(creds.to_json())
 
-    attachment_download(creds)
-
-
-if __name__ == '__main__':
-    main()
+    return attachment_download(creds)
