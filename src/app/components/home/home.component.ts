@@ -14,17 +14,10 @@ import {ReceiptDTO} from '../../models/receiptDTO';
 export class HomeComponent implements OnInit {
 
   receipt = {
-    name: 'Coop Name',
-    user: 'Sven',
-    articles: [{
-      name: 'ArticleName',
-      quantity: 2,
-      price: 3.2,
-      reduced: 1.1,
-      total: 2.1
-    }]
+    name: '',
+    user: '',
+    articles: []
   } as ReceiptDTO;
-  allPdfNames: string[] = [];
   allReceipts: ReceiptDTO[] = [];
 
   constructor(
@@ -36,7 +29,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllReceipts();
-    this.initPdfNames();
   }
 
   fetchAllReceipts(): void {
@@ -67,40 +59,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  initPdfNames(): void {
-    this.pdfService.getAllNames().pipe(first()).subscribe(result => {
-      Object.keys(result).forEach(key => {
-        this.allPdfNames.push(result[key]);
-      });
-    });
-  }
-
   signIn(): void {
     this.authenticationService.signIn();
-  }
-
-  fetchPdf(name: string): void {
-    this.pdfService.getByName(name).pipe(first()).subscribe(result => {
-      const file = new File([result], name);
-      this.loadPdf(file);
-    });
-  }
-
-  loadPdf(file: File): void {
-    this.parsePDF.getFormattedData(file).subscribe(result => {
-      this.receipt.articles = result.articles;
-    });
-  }
-
-  saveReceipt(receipt: ReceiptDTO): void {
-    if (receipt.id == null) {
-      this.receiptService.create(receipt);
-    } else {
-      this.receiptService.update(receipt);
-    }
-  }
-
-  selectFile($event): void {
-    this.loadPdf($event.target.files[0]);
   }
 }

@@ -67,7 +67,15 @@ def create_update_delete_receipt():
 
     if request.method == 'PUT':
         update_receipt(request.form)
-        return 'not yet implemented', 200
+        return 'not yet implemented', 501
+
+
+# ROUTES /article
+@app.route('/article', methods=['PUT'])
+def put_article():
+        article = map_json_to_articleDTO(request.get_json())
+        saved_article: ArticleDTO = update_article(article)
+        return jsonpickle.encode(saved_article, unpicklable=False), 200
 
 
 if __name__ == '__main__':

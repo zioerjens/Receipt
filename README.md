@@ -29,7 +29,8 @@ create table if not exists article (
     quantity float NOT NULL,
     price float NOT NULL,
     reduced float,
-    total float NOT NULL
+    total float NOT NULL,
+    deleted boolean
 );
 
 create table if not exists receipt (
@@ -37,22 +38,4 @@ create table if not exists receipt (
     name varchar(200) UNIQUE NOT NULL,
     user varchar(30)
 );
-
-insert into article (
-	fk_receipt,
-    name,
-    quantity,
-    price,
-    reduced,
-    total
-) values (
-	1,
-    "Produkt",
-    2,
-    5.50,
-    1.10,
-    4.40
-);
-
-insert into receipt ( name, user ) values ("Receipt 01, Coop Sulgenbach", "SVEN");
 ````

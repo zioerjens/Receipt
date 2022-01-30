@@ -23,15 +23,15 @@ class Repo:
         cursor.execute(query)
         all_articles = []
         for element in cursor:
-            all_articles.append(ArticleDTO(element[1], element[2], element[3], element[4], element[5], element[6]))
+            all_articles.append(ArticleDTO(element[1], element[2], element[3], element[4], element[5], element[6], element[7]))
         cursor.close()
         return all_articles
 
     @staticmethod
     def create_article(article: ArticleDTO, receipt_id):
         cursor = connection.cursor()
-        query = "INSERT INTO article (fk_receipt, name, quantity, price, reduced, total) VALUES (%s,%s,%s,%s,%s,%s)"
-        data = (receipt_id, article.name, article.quantity, article.price, article.reduced, article.total)
+        query = "INSERT INTO article (fk_receipt, name, quantity, price, reduced, total, deleted) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+        data = (receipt_id, article.name, article.quantity, article.price, article.reduced, article.total, article.deleted)
         cursor.execute(query, data)
         connection.commit()
         article.id = cursor.lastrowid
@@ -51,3 +51,13 @@ class Repo:
         print('saved receipt: ' + receipt.toString())
         return receipt
 
+    @staticmethod
+    def update_article(article: ArticleDTO):
+        cursor = connection.cursor()
+        query = "UPDATE article SET name = %s, quantity = %s, price = %s, reduced = %s, total = %s, deleted = %s WHERE id = %s"
+        data = (article.name, article.quantity, article.price, article.reduced, article.total, article.deleted, article.id)
+        cursor.execute(query, data)
+        connection.commit()
+        cursor.close()
+        print('updated article: ' + article.toString())
+        return article

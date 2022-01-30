@@ -5,4 +5,5 @@ export interface ArticleDTO {
   price: number;
   reduced?: number;
   total: number;
+  deleted?: boolean;
 }
