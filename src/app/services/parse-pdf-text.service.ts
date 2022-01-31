@@ -41,7 +41,8 @@ export class ParsePdfTextService {
         name: elements[i + missingCellOffset],
         quantity: parseFloat(elements[i + 1 + missingCellOffset]),
         price: parseFloat(elements[i + 2 + missingCellOffset]),
-        total: 0
+        total: 0,
+        deleted: false
       };
       // Produkt ist keine Aktion, darum fehlt eine Zelle, darum wird missingCellOffset dekrementiert
       if (elements[i + 2 + missingCellOffset] === elements[i + 3 + missingCellOffset]) {

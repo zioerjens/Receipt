@@ -48,8 +48,6 @@ export class HomeComponent implements OnInit {
         this.pdfService.getByName(pdfName).pipe(first()).subscribe(pdfData => {
           const file = new File([pdfData], pdfName.slice(0, -4));
           this.parsePDF.getFormattedData(file).subscribe(receipt => {
-            console.log('creating:');
-            console.log(receipt);
             this.receiptService.create(receipt).pipe(first()).subscribe(savedReceipt => {
               this.allReceipts.push(savedReceipt);
             });

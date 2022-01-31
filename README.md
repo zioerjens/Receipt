@@ -30,7 +30,7 @@ create table if not exists article (
     price float NOT NULL,
     reduced float,
     total float NOT NULL,
-    deleted boolean
+    deleted boolean NOT NULL
 );
 
 create table if not exists receipt (

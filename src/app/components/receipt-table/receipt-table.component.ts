@@ -24,8 +24,8 @@ export class ReceiptTableComponent {
     return null;
   }
 
-  removeArticle(article: ArticleDTO): void {
-    article.deleted = true;
-    this.articleService.update(article).subscribe(next => article = next); // TODO MAKE THIS SINNVOLL
+  toggleArticleDeleted(article: ArticleDTO): void {
+    article.deleted = !article.deleted;
+    this.articleService.update(article).subscribe(next => console.log(next)); // TODO MAKE THIS SINNVOLL
   }
 }

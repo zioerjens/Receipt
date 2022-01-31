@@ -39,15 +39,15 @@
     <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency: 'CHF'}}</td>
   </ng-container>
 
-  <!-- Delete Column -->
+  <!-- Deleted Column -->
   <ng-container matColumnDef="deleted">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element"><button class="mat-raised-button" (click)="removeArticle(element)">Delete</button></td>
+    <td mat-cell *matCellDef="let element"><button class="mat-raised-button" (click)="toggleArticleDeleted(element)">Delete</button></td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.strikeout]="row.deleted"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>

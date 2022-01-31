@@ -1,6 +1,10 @@
-from Api import connection
+import mysql as mysql
+from mysql import connector
+
 from ArticleDTO import ArticleDTO
 from ReceiptDTO import ReceiptDTO
+
+connection = mysql.connector.connect(user='backend', password='1234', host='127.0.0.1', database='receiptDB')
 
 
 class Repo:
@@ -23,7 +27,7 @@ class Repo:
         cursor.execute(query)
         all_articles = []
         for element in cursor:
-            all_articles.append(ArticleDTO(element[1], element[2], element[3], element[4], element[5], element[6], element[7]))
+            all_articles.append(ArticleDTO(element[0], element[2], element[3], element[4], element[5], element[6], element[7]))
         cursor.close()
         return all_articles
 

@@ -5,3 +5,12 @@ table {
 tr.mat-footer-row {
   font-weight: bold;
 }
+
+tr.strikeout td:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  border-bottom: 2px solid #FFF;
+  width: 94%;
+}

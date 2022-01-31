@@ -1,4 +1,4 @@
-from ArticleService import create_articles
+from ArticleService import ArticleService
 from ReceiptDTO import ReceiptDTO, is_valid_receipt
 from Repo import Repo
 
@@ -7,7 +7,7 @@ def create_receipt(receipt: ReceiptDTO):
     if is_valid_receipt(receipt):
         saved_receipt: ReceiptDTO = Repo.create_receipt(receipt)
         if receipt.articles is not None:
-            saved_receipt.articles = create_articles(receipt.articles, saved_receipt.id)
+            saved_receipt.articles = ArticleService.create_articles(receipt.articles, saved_receipt.id)
 
         return saved_receipt
     return 'not-saved', 400

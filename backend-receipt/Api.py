@@ -5,14 +5,13 @@ from os.path import isfile, join
 from urllib.parse import unquote
 
 import jsonpickle
-import mysql.connector
 from flask import Flask, send_file, request
 from flask_cors import CORS
 from flask_restful import Api
 
 import LoginAndDownload
 from ArticleDTO import map_json_to_articleDTO, ArticleDTO
-from ArticleService import update_article
+from ArticleService import ArticleService
 from ReceiptDTO import map_json_to_receiptDTO, ReceiptDTO
 from ReceiptService import create_receipt, update_receipt, get_all_receipts
 
@@ -21,8 +20,7 @@ store_dir = os.getcwd() + '\\Downloads'
 app = Flask(__name__)
 api = Api(app)
 CORS(app)  # For limiting the request urls
-global connection
-connection = mysql.connector.connect(user='backend', password='1234', host='127.0.0.1', database='receiptDB')
+
 
 # Restrict request Urls
 # TODO add webapp url and test this so only authenticated users can send requests
@@ -77,7 +75,7 @@ def create_update_delete_receipt():
 @app.route('/article', methods=['PUT'])
 def put_article():
         article = map_json_to_articleDTO(request.get_json())
-        saved_article: ArticleDTO = update_article(article)
+        saved_article: ArticleDTO = ArticleService.update_article(article)
         return jsonpickle.encode(saved_article, unpicklable=False), 200
 
 
