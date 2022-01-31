@@ -13,11 +13,7 @@ import {ReceiptDTO} from '../../models/receiptDTO';
 })
 export class HomeComponent implements OnInit {
 
-  receipt = {
-    name: '',
-    user: '',
-    articles: []
-  } as ReceiptDTO;
+  loadedReceipt: ReceiptDTO;
   allReceipts: ReceiptDTO[] = [];
 
   constructor(
@@ -39,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadReceipt(receipt: ReceiptDTO): void {
-    this.receipt = receipt;
+    this.loadedReceipt = receipt;
   }
 
   downloadPdfsAndSave(): void {
@@ -59,5 +55,14 @@ export class HomeComponent implements OnInit {
 
   signIn(): void {
     this.authenticationService.signIn();
+  }
+
+  hasUser(receipt: ReceiptDTO, user: string): boolean {
+    return receipt.user === user;
+  }
+
+  setUser(receipt: ReceiptDTO, user: string): void {
+    receipt.user = user;
+    this.receiptService.update(receipt).subscribe(next => alert('updated user')); // TODO MAKE PRETTY
   }
 }

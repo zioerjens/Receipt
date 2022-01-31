@@ -9,3 +9,26 @@ button {
 h2 {
   margin-top: 10px;
 }
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 3em;
+}
+
+.container button {
+  width: 50%;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: #424242;
+
+  &:hover {
+    background-color: #383838;
+    border: none;
+    outline: inherit;
+  }
+
+  &.selected {
+    background-color: #BBBBBB;
+    color: #424242;
+  }
+}

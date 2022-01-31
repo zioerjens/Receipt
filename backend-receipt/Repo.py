@@ -56,6 +56,17 @@ class Repo:
         return receipt
 
     @staticmethod
+    def update_receipt(receipt: ReceiptDTO):
+        cursor = connection.cursor()
+        query = "UPDATE receipt SET name = %s, user = %s WHERE id = %s"
+        data = (receipt.name, receipt.user, receipt.id)
+        cursor.execute(query, data)
+        connection.commit()
+        cursor.close()
+        print('updated receipt: ' + receipt.toString())
+        return receipt
+
+    @staticmethod
     def update_article(article: ArticleDTO):
         cursor = connection.cursor()
         query = "UPDATE article SET name = %s, quantity = %s, price = %s, reduced = %s, total = %s, deleted = %s WHERE id = %s"

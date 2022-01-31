@@ -3,14 +3,20 @@
 <!--Add buttons to initiate auth sequence and sign out-->
 <button class="mat-raised-button" id="authorize_button" style="display: block;" (click)="signIn();">Authorize</button>
 
-<h2>Select PDF</h2>
+<h2>Select Receipt</h2>
 <div *ngFor="let receipt of allReceipts">
-  <button class="mat-raised-button" (click)="loadReceipt(receipt)">{{receipt.name}}</button>
+  <button class="mat-flat-button" (click)="loadReceipt(receipt)">{{receipt.name}}</button>
 </div>
 
 <pre id="content" style="white-space: pre-wrap;"></pre>
 <hr>
-<h2>Table</h2>
-<div style="padding-top: 1em">
-  <app-receipt-table [dataSource]="receipt.articles"></app-receipt-table>
-</div>
+<ng-container *ngIf="loadedReceipt != null">
+  <h2>Table</h2>
+  <div style="padding-top: 1em">
+    <div class="container">
+      <button class="item" [class.selected]="hasUser(loadedReceipt, 'flo')" (click)="setUser(loadedReceipt, 'flo')">Flo</button>
+      <button class="item" [class.selected]="hasUser(loadedReceipt, 'sven')" (click)="setUser(loadedReceipt, 'sven')">Sven</button>
+    </div>
+    <app-receipt-table [dataSource]="loadedReceipt.articles"></app-receipt-table>
+  </div>
+</ng-container>

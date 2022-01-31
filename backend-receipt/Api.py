@@ -67,8 +67,9 @@ def create_update_delete_receipt():
         return jsonpickle.encode(receipt, unpicklable=False), 200
 
     if request.method == 'PUT':
-        update_receipt(request.form)
-        return 'not yet implemented', 501
+        receipt = map_json_to_receiptDTO(request.get_json())
+        receipt: ReceiptDTO = update_receipt(receipt)
+        return jsonpickle.encode(receipt, unpicklable=False), 200
 
 
 # ROUTES /article

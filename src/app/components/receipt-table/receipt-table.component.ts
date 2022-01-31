@@ -26,6 +26,6 @@ export class ReceiptTableComponent {
 
   toggleArticleDeleted(article: ArticleDTO): void {
     article.deleted = !article.deleted;
-    this.articleService.update(article).subscribe(next => console.log(next)); // TODO MAKE THIS SINNVOLL
+    this.articleService.update(article).subscribe(next => alert('successfully saved')); // TODO MAKE THIS NICE
   }
 }

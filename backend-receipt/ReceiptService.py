@@ -14,7 +14,7 @@ def create_receipt(receipt: ReceiptDTO):
 
 
 def update_receipt(receipt):
-    print(receipt)
+    return Repo.update_receipt(receipt)
 
 
 def get_all_receipts():
