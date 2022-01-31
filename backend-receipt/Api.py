@@ -11,7 +11,10 @@ from flask_cors import CORS
 from flask_restful import Api
 
 import LoginAndDownload
-from ReceiptService import *
+from ArticleDTO import map_json_to_articleDTO, ArticleDTO
+from ArticleService import update_article
+from ReceiptDTO import map_json_to_receiptDTO, ReceiptDTO
+from ReceiptService import create_receipt, update_receipt, get_all_receipts
 
 store_dir = os.getcwd() + '\\Downloads'
 

@@ -1,5 +1,5 @@
-from ArticleService import *
-from ReceiptDTO import *
+from ArticleService import create_articles
+from ReceiptDTO import ReceiptDTO, is_valid_receipt
 from Repo import Repo
 
 

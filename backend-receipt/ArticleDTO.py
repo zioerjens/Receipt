@@ -9,7 +9,7 @@ class ArticleDTO:
         self.deleted = deleted
 
     def toString(self):
-      return '{{id: {}, name: {}, quantity: {}, price: {}, reduced: {}, total: {}, deleted: {}}'.format(self.id, self.name, self.quantity, self.price, self.reduced, self.total, self.deleted)
+      return '{{id: {}, name: {}, quantity: {}, price: {}, reduced: {}, total: {}, deleted: {}}}'.format(self.id, self.name, self.quantity, self.price, self.reduced, self.total, self.deleted)
 
 def map_json_to_articleDTO(request_value):
     article_id = None
