@@ -19,7 +19,10 @@ export class ReceiptTableComponent {
 
   getTotal(): number {
     if (this.dataSource) {
-      return this.dataSource.map(m => m.total).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+      return this.dataSource
+        .filter(a => !a.deleted)
+        .map(m => m.total)
+        .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
     }
     return null;
   }
