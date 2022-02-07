@@ -12,7 +12,7 @@ import {ReceiptTableComponent} from './components/receipt-table/receipt-table.co
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
-import credentials from '../../credentials.json';
+import credentials from '../../credentials_1.json';
 import {HttpClientModule} from '@angular/common/http';
 
 const gapiClientConfig: NgGapiClientConfig = {

@@ -18,7 +18,7 @@ def attachment_download(creds):
     try:
         service = build('gmail', 'v1', credentials=creds)
         results = service.users().messages().list(userId='me', labelIds=[
-          'Label_3386902473074528084']).execute()  # XXXX is label id use INBOX to download from inbox
+          'Label_3386902473074528084', 'UNREAD']).execute()  # XXXX is label id use INBOX to download from inbox
         messages = results.get('messages', [])
 
         for message in messages:
@@ -43,6 +43,9 @@ def attachment_download(creds):
                             f.close()
                             print('downloaded: ' + filename)
                             newly_downloaded.append(filename)
+
+            service.users().messages().modify(userId='me', id=message['id'], body={'removeLabelIds': ['UNREAD']}).execute()
+
 
     except Exception as error:
         print(error)

@@ -14,7 +14,8 @@ export class ReceiptService {
   constructor(private http: HttpClient) {}
 
   create(receipt: ReceiptDTO): Observable<ReceiptDTO> {
-    return this.http.post<ReceiptDTO>(this.BASE_URL, receipt);
+    console.log(receipt);
+    return this.http.post<any>(this.BASE_URL, receipt);
   }
 
   update(receipt: ReceiptDTO): Observable<ReceiptDTO> {
